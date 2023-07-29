@@ -1,6 +1,7 @@
 import dotenv from "dotenv"
-import express from "express"
+import express, { Request, Response, NextFunction } from "express"
 import {router} from "./router.js"
+
 
 dotenv.config()
 
@@ -12,9 +13,9 @@ app.use(express.json())
 
 app.use(router)
 
-app.use((e, req, res, next) => {
-    if (e instanceof Error){
-        return res.status(400).json({e: e.message})
+app.use((e: Error, req: Request, res: Response, next: NextFunction) => {
+    if (e){
+        return res.status(400).json({error: e.message})
     }
 
     return res.status(500).json({
