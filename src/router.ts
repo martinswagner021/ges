@@ -1,18 +1,20 @@
 import { Request, Response, NextFunction, Router } from "express";
+
 import { ensureAuth } from "./middlewares/ensureAuth.js";
-import createUser from "./services/createUser.js";
+
+import createUserController from "./controllers/createUserController.js";
+import authUserController from "./controllers/authUserController.js";
 
 const router = Router()
 
 // Utilities
-router.post('/login') // autenticar
-router.post('/register', (req: Request, res: Response, next: NextFunction) => {
-    const test = createUser("wagnerm", "123")
-    res.send(test)
-}) // criar usuario
+router.post('/login', authUserController) // autenticar
+router.post('/register', createUserController) // criar usuario
+
+// List
+router.get('/relatorio', ensureAuth, (req, res) => res.send("Ok")) // criar relatorio
 
 // Create
-router.post('/relatorio', ensureAuth) // criar relatorio
 router.post('/veiculo', ensureAuth) // criar veiculo
 router.post('/cliente', ensureAuth) // criar cliente
 

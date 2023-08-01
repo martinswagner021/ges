@@ -1,10 +1,9 @@
 import mongoose from "mongoose"
+import { config } from "dotenv"
+config()
 
-await mongoose.connect(process.env.DB_URI)
+mongoose.connect(process.env.MONGO_URL)
+.then(() => console.log("Successfully connected to DB."))
+.catch((e) => console.log(e.message))
 
-const db = mongoose.connection
-
-db.on("error", (e) => console.log(e.message))
-db.on("connection", () => console.log('Succesfully connected to DB.'))
-
-export default db
+export default mongoose

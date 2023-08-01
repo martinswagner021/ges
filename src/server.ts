@@ -1,9 +1,8 @@
-import dotenv from "dotenv"
+import { config } from "dotenv"
 import express, { Request, Response, NextFunction } from "express"
-import {router} from "./router.js"
+import { router } from "./router.js"
 
-
-dotenv.config()
+config()
 
 const port = process.env.PORT
 

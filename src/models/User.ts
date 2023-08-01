@@ -1,5 +1,5 @@
 import { Schema } from "mongoose"
-import db from "../db/connect.js"
+import mongoose from "../db/connect.js"
 
 const userSchema = new Schema({
     username: {
@@ -12,6 +12,6 @@ const userSchema = new Schema({
     }
 })
 
-const User = db.model("User", userSchema)
+const User = mongoose.model("User", userSchema)
 
 export default User
