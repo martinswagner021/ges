@@ -1,9 +1,10 @@
-import mongoose from "mongoose"
 import { config } from "dotenv"
 config()
 
+import mongoose from "mongoose"
+
 mongoose.connect(process.env.MONGO_URL)
 .then(() => console.log("Successfully connected to DB."))
-.catch((e) => console.log(e.message))
+.catch((err) => console.log(err.message))
 
 export default mongoose

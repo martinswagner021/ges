@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction, Router } from "express";
+import { Router } from "express";
 
 import { ensureAuth } from "./middlewares/ensureAuth.js";
 
 import createUserController from "./controllers/createUserController.js";
 import authUserController from "./controllers/authUserController.js";
+import testController from "./controllers/testController.js";
 
 const router = Router()
 
@@ -12,7 +13,7 @@ router.post('/login', authUserController) // autenticar
 router.post('/register', createUserController) // criar usuario
 
 // List
-router.get('/relatorio', ensureAuth, (req, res) => res.send("Ok")) // criar relatorio
+router.get('/relatorio', ensureAuth, testController) // listar relatorios
 
 // Create
 router.post('/veiculo', ensureAuth) // criar veiculo
@@ -28,4 +29,4 @@ router.delete('/relatorio', ensureAuth) // remover relatorio
 router.delete('/veiculo', ensureAuth) // remover veiculo
 router.delete('/cliente', ensureAuth) // remover cliente
 
-export {router}
+export default router
