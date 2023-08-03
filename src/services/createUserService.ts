@@ -1,10 +1,10 @@
 import { hash } from "bcrypt";
 import User from "../models/User.js";
 
-export default async function createUserService(username: string, password: string){
+export default async function createUserService(email: string, password: string){
 
     const [userAlreadyExists, hashed_password] = await Promise.all([
-        User.findOne({"username": username}),
+        User.findOne({"email": email}),
         hash(password, 10)
     ])
 
@@ -13,7 +13,7 @@ export default async function createUserService(username: string, password: stri
     }
 
     const createdUser = await User.create({
-        username: username,
+        email: email,
         password: hashed_password
     })
 

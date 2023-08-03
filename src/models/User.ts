@@ -2,7 +2,7 @@ import { Schema } from "mongoose"
 import mongoose from "../db/connect.js"
 
 const userSchema = new Schema({
-    username: {
+    email: {
         type: String,
         require: true
     },

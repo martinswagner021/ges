@@ -4,12 +4,12 @@ import jwt from "jsonwebtoken"
 import authUserService from "../services/authUserService.js"
 
 export default async function authUserController(req: Request, res: Response, next: NextFunction) {
-    const { username, password } = req.body
+    const { email, password } = req.body
 
     try {
-        const user = await authUserService(username, password)
+        const user = await authUserService(email, password)
         const token = jwt.sign({
-            user: user.username
+            user: user.email
         }, process.env.JWT_SECRET, {
             subject: user._id.toString(),
             expiresIn: "5h"
