@@ -4,10 +4,10 @@ import jwt from "jsonwebtoken"
 import createUserService from "../services/createUserService.js";
 
 export default async function createUserController(req: Request, res: Response, next: NextFunction) {
-    const { email, password } = req.body
+    const { email, password, telefone, cnpj, endereco } = req.body
 
     try {
-        const user = await createUserService(email, password)
+        const user = await createUserService({email, password, telefone, cnpj, endereco})
         const token = jwt.sign({
             user: user.email
         }, process.env.JWT_SECRET, {

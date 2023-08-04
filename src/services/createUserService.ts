@@ -1,7 +1,22 @@
 import { hash } from "bcrypt";
 import User from "../models/User.js";
 
-export default async function createUserService(email: string, password: string){
+interface IUserRequest{
+    email: string,
+    password: string,
+    telefone: string,
+    cnpj: number,
+    endereco: {
+        cep: number,
+        rua: string,
+        cidade: string,
+        estado: string
+    }
+}
+
+export default async function createUserService(
+    { email, password, telefone, cnpj, endereco } : IUserRequest
+    ){
 
     const [userAlreadyExists, hashed_password] = await Promise.all([
         User.findOne({"email": email}),
@@ -13,8 +28,11 @@ export default async function createUserService(email: string, password: string)
     }
 
     const createdUser = await User.create({
-        email: email,
-        password: hashed_password
+        email,
+        password: hashed_password,
+        telefone,
+        cnpj,
+        endereco
     })
 
     await createdUser.save()
