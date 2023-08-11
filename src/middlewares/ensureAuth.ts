@@ -7,7 +7,7 @@ export function ensureAuth(req: Request, res: Response, next: NextFunction){
         const { sub } = jwt.verify(token, process.env.JWT_SECRET)
         req["user_id"] = sub
     } catch (error) {
-        res.status(401).end()
+        return res.status(401).end()
     }
 
     return next()

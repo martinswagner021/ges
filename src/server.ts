@@ -3,6 +3,7 @@ config()
 
 import express from "express"
 import router from "./router.js"
+import { Request, Response } from "express"
 
 const port = process.env.PORT
 

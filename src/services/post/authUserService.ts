@@ -1,9 +1,9 @@
 import { compare } from "bcrypt";
 
-import User from "../models/User.js";
+import User from "../../models/User.js";
 
-export default async function authUserService(username: string, password: string){
-    const fetchedUser = await User.findOne({"username": username})
+export default async function authUserService(email: string, password: string){
+    const fetchedUser = await User.findOne({"email": email})
 
     if (!fetchedUser){
         throw new Error("Either username or password doesn't match.")
