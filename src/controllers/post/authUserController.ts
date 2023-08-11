@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import jwt from "jsonwebtoken"
 
-import authUserService from "../services/authUserService.js"
+import authUserService from "../../services/post/authUserService.js"
 
 export default async function authUserController(req: Request, res: Response, next: NextFunction) {
     const { email, password } = req.body
@@ -14,8 +14,8 @@ export default async function authUserController(req: Request, res: Response, ne
             subject: user._id.toString(),
             expiresIn: "5h"
         })
-        res.send(token)
+        return res.send(token)
     } catch (error) {
-        res.status(400).send({error: error.message})
+        return res.status(400).send({error: error.message})
     }
 }

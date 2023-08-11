@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken"
 
-import createUserService from "../services/createUserService.js";
+import createUserService from "../../services/post/createUserService.js";
 
 export default async function createUserController(req: Request, res: Response, next: NextFunction) {
     const { email, password, telefone, cnpj, endereco } = req.body
@@ -17,7 +17,7 @@ export default async function createUserController(req: Request, res: Response, 
     
         return res.send(token)
     } catch (error){
-        res.status(400).send({error: error.message})
+        return res.status(400).send({error: error.message})
     }
 
 }

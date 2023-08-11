@@ -1,51 +1,53 @@
-import { Schema } from "mongoose"
+import { Schema, SchemaTypes } from "mongoose"
 import mongoose from "../db/connect.js"
 
 const userSchema = new Schema({
     email: {
-        type: String,
+        type: SchemaTypes.String,
         required: true
     },
     password: {
-        type: String,
+        type: SchemaTypes.String,
         required: true
     },
     telefone: {
-        type: String,
-        maxlength: 11,
+        type: SchemaTypes.String,
+        maxlength: 17,
         required: true
     },
     cnpj: {
-        type: Number,
+        type: SchemaTypes.String,
+        maxlength: 18,
         required: true
-    },
-    paymentStatus: {
-        type: Boolean,
-        default: false
     },
     endereco: {
         cep: {
-            type: Number,
-            maxlength: 8,
+            type: SchemaTypes.String,
+            maxlength: 9,
             required: true
         },
         rua: {
-            type: String,
-            maxlength: 40,
+            type: SchemaTypes.String,
+            maxlength: 150,
             required: true
         },
         cidade: {
-            type: String,
+            type: SchemaTypes.String,
             maxlength: 40,
             required: true
         },
         estado: {
-            type: String,
+            type: SchemaTypes.String,
             maxlength: 2,
             minlength: 2,
             required: true
         }
-    }
+    },
+    paymentStatus: {
+        type: SchemaTypes.Boolean,
+        default: false
+    },
+    analistas: [SchemaTypes.ObjectId]
 })
 
 const User = mongoose.model("User", userSchema)

@@ -1,13 +1,13 @@
 import { hash } from "bcrypt";
-import User from "../models/User.js";
+import User from "../../models/User.js";
 
 interface IUserRequest{
     email: string,
     password: string,
     telefone: string,
-    cnpj: number,
+    cnpj: string,
     endereco: {
-        cep: number,
+        cep: string,
         rua: string,
         cidade: string,
         estado: string
